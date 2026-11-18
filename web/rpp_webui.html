@@ -1,0 +1,968 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Participation Platform</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a bold navy hero that explains the idea in one glance, then colour-coded blocks — coral = asking, teal = offering, sunny = teaming up, green = done. */
+:root{
+  --bg:#f3f5fb; --surface:#ffffff; --surface-2:#f6f8fc; --line:#e2e6f0; --line-2:#cdd3e2;
+  --ink:#14213d; --mut:#56607a; --faint:#8b93a8;
+  --hero:#14213d; --hero-2:#1e2f55; --hero-ink:#ffffff; --hero-mut:#b9c3dd;
+  --coral:#ff6a48; --coral-soft:#ffe5dd; --coral-ink:#c2401f;
+  --teal:#0aa597; --teal-soft:#d4f3ef; --teal-ink:#08776d;
+  --sun:#ffc233; --sun-soft:#fff1c9; --sun-ink:#8a5c00;
+  --green:#1d9e5f; --green-soft:#d9f3e5; --green-ink:#14774a;
+  --red:#e0404b; --red-soft:#fde0e2; --red-ink:#b42a35;
+  --blue:#3168e8; --blue-soft:#e0e9fd; --blue-ink:#2350bd;
+  --grape:#7a59f0; --grape-soft:#ece6fe; --grape-ink:#5a3bc9;
+  --grey:#8b93a8; --grey-soft:#eceff5;
+  --shadow:0 1px 2px rgba(20,33,61,.06),0 8px 24px rgba(20,33,61,.07);
+  --f-display:"Bricolage Grotesque",system-ui,sans-serif; --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:18px; --r-sm:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1120; --surface:#151c2f; --surface-2:#1b2338; --line:#263049; --line-2:#344061;
+  --ink:#eef1f8; --mut:#a3acc4; --faint:#717a94;
+  --hero:#18244a; --hero-2:#22305c; --hero-ink:#ffffff; --hero-mut:#b9c3dd;
+  --coral:#ff7e60; --coral-soft:#3a1e19; --coral-ink:#ffab95;
+  --teal:#2cc3b3; --teal-soft:#0f302d; --teal-ink:#7de0d4;
+  --sun:#ffc94d; --sun-soft:#3a2f12; --sun-ink:#ffd677;
+  --green:#3cc282; --green-soft:#12301f; --green-ink:#86e0b3;
+  --red:#ff6b74; --red-soft:#3b1a1f; --red-ink:#ff9da3;
+  --blue:#6d96ff; --blue-soft:#1a2648; --blue-ink:#a3bcff;
+  --grape:#a58bff; --grape-soft:#2a2150; --grape-ink:#c6b6ff;
+  --grey:#717a94; --grey-soft:#232b40;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px rgba(0,0,0,.3); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1120; --surface:#151c2f; --surface-2:#1b2338; --line:#263049; --line-2:#344061;
+  --ink:#eef1f8; --mut:#a3acc4; --faint:#717a94;
+  --hero:#18244a; --hero-2:#22305c; --hero-ink:#ffffff; --hero-mut:#b9c3dd;
+  --coral:#ff7e60; --coral-soft:#3a1e19; --coral-ink:#ffab95;
+  --teal:#2cc3b3; --teal-soft:#0f302d; --teal-ink:#7de0d4;
+  --sun:#ffc94d; --sun-soft:#3a2f12; --sun-ink:#ffd677;
+  --green:#3cc282; --green-soft:#12301f; --green-ink:#86e0b3;
+  --red:#ff6b74; --red-soft:#3b1a1f; --red-ink:#ff9da3;
+  --blue:#6d96ff; --blue-soft:#1a2648; --blue-ink:#a3bcff;
+  --grape:#a58bff; --grape-soft:#2a2150; --grape-ink:#c6b6ff;
+  --grey:#717a94; --grey-soft:#232b40;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px rgba(0,0,0,.3); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.015em;line-height:1.15}
+h2{font-size:26px;font-weight:800}h3{font-size:19px;font-weight:700}
+p{margin:0}
+.muted{color:var(--mut)}.small{font-size:14px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--surface);border-bottom:1px solid var(--line)}
+.topin,.wrap,.tabs-in,footer.store{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.topin{display:flex;align-items:center;gap:10px 20px;flex-wrap:wrap;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.logo{width:36px;height:36px;position:relative;flex:none}
+.logo i{position:absolute;width:20px;height:20px;border-radius:50%;opacity:.92;box-shadow:0 0 0 2px var(--surface)}
+.logo i:nth-child(1){left:0;top:8px;background:var(--coral)}.logo i:nth-child(2){left:8px;top:0;background:var(--sun)}.logo i:nth-child(3){left:16px;top:8px;background:var(--teal)}
+.brand b{font:800 19px/1.1 var(--f-display);display:block}
+.brand span{font-size:12.5px;color:var(--mut)}
+.whobox{display:flex;align-items:center;gap:10px;min-width:0;max-width:100%}
+.wholbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);white-space:nowrap}
+.who{display:flex;gap:4px;overflow-x:auto;padding:2px;min-width:0;scrollbar-width:none}
+.who::-webkit-scrollbar{display:none}
+.wbtn{border:0;background:none;color:var(--mut);font:600 11.5px var(--f-body);display:flex;flex-direction:column;align-items:center;gap:2px;padding:3px 5px;border-radius:12px;cursor:pointer;min-width:48px}
+.wbtn .av{transition:transform .15s}
+.wbtn:hover .av{transform:translateY(-2px)}
+.wbtn.on{color:var(--ink);background:var(--surface-2)}
+.wbtn.on .av{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--blue)}
+.switch{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--mut);cursor:pointer;user-select:none;position:relative}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.switch .knob{width:38px;height:22px;border-radius:99px;background:var(--line-2);position:relative;transition:background .2s;flex:none}
+.switch .knob::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--surface);transition:transform .2s}
+.switch input:checked+.knob{background:var(--green)}
+.switch input:checked+.knob::after{transform:translateX(16px)}
+.switch input:focus-visible+.knob{outline:3px solid var(--blue);outline-offset:2px}
+
+.tabs{background:var(--surface);border-bottom:1px solid var(--line)}
+.tabs-in{display:flex;gap:6px;padding-block:8px;overflow-x:auto}
+.tab{border:0;background:none;color:var(--mut);font:600 15px var(--f-body);display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;cursor:pointer;white-space:nowrap;position:relative}
+.tab:hover{background:var(--surface-2);color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--surface)}
+.tab .count{background:var(--coral);color:#fff;font-size:11.5px;font-weight:700;border-radius:99px;padding:0 7px;line-height:18px}
+@media (max-width:760px){
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:9;border-top:1px solid var(--line);border-bottom:0}
+  .tabs-in{justify-content:space-around;gap:0;padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px));padding-left:max(4px,env(safe-area-inset-left,0px));padding-right:max(4px,env(safe-area-inset-right,0px))}
+  .tab{flex-direction:column;gap:2px;font-size:11.5px;padding:6px 8px;border-radius:12px;flex:1}
+  .tab.on{background:var(--surface-2);color:var(--ink)}
+  .tab .count{position:absolute;top:0;right:calc(50% - 24px)}
+  .wrap{padding-bottom:110px!important}
+  footer.store{padding-bottom:100px!important}
+  .whobox{width:100%}.wholbl{display:none}
+}
+
+.wrap{padding-block:26px 56px;display:flex;flex-direction:column;gap:34px}
+footer.store{font-size:13px;color:var(--faint);padding-block:0 30px}
+section.blk{display:flex;flex-direction:column;gap:16px;min-width:0}
+.shead{display:flex;flex-direction:column;gap:4px}
+.shead p{color:var(--mut);max-width:62ch}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+
+/* ---------- buttons, pills ---------- */
+.btn{font:600 15px var(--f-body);border:1.5px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:99px;padding:9px 18px;min-height:42px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;transition:transform .12s,background .15s}
+.btn:hover{background:var(--surface-2)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.big{font-size:16.5px;padding:12px 24px;min-height:50px}
+.btn.sm{min-height:34px;padding:5px 13px;font-size:14px}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.btn.coral{background:var(--coral);border-color:var(--coral);color:#fff}
+.btn.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.sun{background:var(--sun);border-color:var(--sun);color:#14213d}
+.btn.ghost{border-color:transparent;background:none;color:var(--blue-ink)}
+.btn.ghost:hover{background:var(--blue-soft)}
+.btn.yes{background:var(--green);border-color:var(--green);color:#fff}
+.btn.change{color:var(--blue-ink);border-color:var(--blue)}
+.btn.later{color:var(--sun-ink);border-color:var(--sun)}
+.btn.no{color:var(--red-ink);border-color:var(--red)}
+.btn.change.on{background:var(--blue-soft)}.btn.later.on{background:var(--sun-soft)}.btn.no.on{background:var(--red-soft)}
+.btn.yes.on{box-shadow:0 0 0 3px var(--green-soft)}
+.btn.danger{color:var(--red-ink);border-color:var(--red)}
+.btn.danger.on{background:var(--red-soft)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:3px 11px;border-radius:99px;white-space:nowrap;line-height:1.5}
+.p-ok{background:var(--green-soft);color:var(--green-ink)}.p-wait{background:var(--sun-soft);color:var(--sun-ink)}.p-bad{background:var(--red-soft);color:var(--red-ink)}
+.p-ask{background:var(--coral-soft);color:var(--coral-ink)}.p-offer{background:var(--teal-soft);color:var(--teal-ink)}.p-app{background:var(--grape-soft);color:var(--grape-ink)}
+.p-grey{background:var(--grey-soft);color:var(--mut)}.p-blue{background:var(--blue-soft);color:var(--blue-ink)}
+
+.av{--h:220;width:34px;height:34px;border-radius:50%;flex:none;display:inline-grid;place-items:center;font:800 13px var(--f-display);color:#fff;background:hsl(var(--h) 62% 50%)}
+.av.sm{width:24px;height:24px;font-size:10px}
+.av.lg{width:52px;height:52px;font-size:18px}
+.you{font-size:11.5px;font-weight:700;color:var(--blue-ink);background:var(--blue-soft);padding:0 7px;border-radius:6px;vertical-align:2px;margin-left:4px}
+
+/* ---------- hero ---------- */
+.hero{background:var(--hero);color:var(--hero-ink);border-radius:28px;padding:40px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-120px;top:-160px;background:var(--hero-2);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(34px,5vw,54px);font-weight:800;line-height:1.04;letter-spacing:-.03em}
+.hero h1 .hl{background:linear-gradient(transparent 62%,var(--coral) 62%,var(--coral) 92%,transparent 92%);padding:0 2px}
+.hero h1 .hl2{background:linear-gradient(transparent 62%,var(--teal) 62%,var(--teal) 92%,transparent 92%);padding:0 2px}
+.hero p.lead{color:var(--hero-mut);font-size:18px;margin-top:16px;max-width:46ch}
+.hero .row{margin-top:26px}
+.hero .btn.ghostw{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+.hero .btn.ghostw:hover{background:rgba(255,255,255,.1)}
+.mock{display:flex;flex-direction:column;gap:12px;max-width:380px;justify-self:center;width:100%}
+.bub{background:var(--surface);color:var(--ink);border-radius:18px;padding:12px 14px;display:flex;gap:11px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:14.5px;line-height:1.35}
+.bub b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.07em}
+.bub.ask{transform:rotate(-2deg);margin-right:40px}.bub.ask b{color:var(--coral-ink)}
+.bub.off1{transform:rotate(1.5deg);margin-left:40px}.bub.off1 b,.bub.off2 b{color:var(--teal-ink)}
+.bub.off2{transform:rotate(-1deg);margin-left:12px;margin-right:20px}
+.bub.team{background:var(--sun);color:#14213d;transform:rotate(1deg);flex-direction:column;align-items:flex-start;gap:8px;padding:14px 16px}
+.bub.team b{color:#14213d;opacity:.75}
+.bub.team .faces{display:flex}
+.bub.team .faces .av{box-shadow:0 0 0 3px var(--sun);margin-right:-6px}
+.bub.team .t{font:800 18px var(--f-display)}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr);padding:28px 22px}.mock{max-width:420px}}
+@media (max-width:460px){.bub.ask{margin-right:12px}.bub.off1{margin-left:12px}}
+
+/* ---------- how it works ---------- */
+.how{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;list-style:none;padding:0;margin:0}
+@media (max-width:900px){.how{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.how{grid-template-columns:minmax(0,1fr)}}
+.how li{border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.how .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff}
+.how .ic svg.i{width:24px;height:24px}
+.how .n{font:800 13px var(--f-display);letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.how h3{font-size:20px}
+.how p{font-size:14.5px}
+.how .h1{background:var(--coral-soft);color:var(--coral-ink)}.how .h1 .ic{background:var(--coral)}
+.how .h2{background:var(--teal-soft);color:var(--teal-ink)}.how .h2 .ic{background:var(--teal)}
+.how .h3{background:var(--sun-soft);color:var(--sun-ink)}.how .h3 .ic{background:var(--sun);color:#14213d}
+.how .h4{background:var(--green-soft);color:var(--green-ink)}.how .h4 .ic{background:var(--green)}
+.how li h3,.how li p{color:var(--ink)}
+
+/* ---------- panels ---------- */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+@media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.empty{border:2px dashed var(--line-2);border-radius:var(--r);padding:28px;text-align:center;color:var(--mut);display:flex;flex-direction:column;gap:12px;align-items:center}
+.todo{display:flex;gap:12px;align-items:center;padding:13px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.todo:first-child{border-top:0;padding-top:0}
+.todo .tt{flex:1 1 220px;min-width:0;font-weight:600}
+.crow{display:flex;gap:14px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;cursor:pointer;flex-wrap:wrap}
+.crow:hover{border-color:var(--line-2);box-shadow:var(--shadow)}
+.crow .tt{flex:1 1 200px;min-width:0;font:700 17px var(--f-display)}
+.stack{display:flex}
+.stack .face{margin-right:-8px}
+.stack .face .av{box-shadow:0 0 0 2.5px var(--surface)}
+.clist{display:flex;flex-direction:column;gap:12px}
+
+/* steps for trying it */
+ol.try{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:t}
+ol.try li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+ol.try li::before{counter-increment:t;content:counter(t);width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--surface);font:800 15px var(--f-display);display:grid;place-items:center}
+ol.try .row{margin-top:8px}
+
+/* ---------- face with answer badge ---------- */
+.face{position:relative;display:inline-flex;flex:none}
+.face .b{position:absolute;right:-3px;bottom:-3px;width:20px;height:20px;border-radius:50%;border:2.5px solid var(--surface);display:grid;place-items:center;font:800 11px/1 var(--f-body);color:#fff}
+.av.sm+.b{width:15px;height:15px;font-size:8px;border-width:2px;right:-4px;bottom:-4px}
+.b-green{background:var(--green)}.b-sun{background:var(--sun);color:#14213d!important}.b-red{background:var(--red)}.b-blue{background:var(--blue)}.b-grey{background:var(--grey)}
+
+/* ---------- team-up card ---------- */
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;min-width:0;scroll-margin-top:160px}
+.cband{display:flex;align-items:center;gap:10px;padding:10px 20px;font:700 15px var(--f-body);flex-wrap:wrap}
+.cband.ok{background:var(--green);color:#fff}
+.cband.wait{background:var(--sun);color:#14213d}
+.cband.bad{background:var(--red);color:#fff}
+.cband .sub{font-weight:500;opacity:.85;font-size:14px}
+.cband .tagw{margin-left:auto;font-size:12.5px;font-weight:700;background:rgba(255,255,255,.28);padding:1px 10px;border-radius:99px}
+.cmain{padding:20px;display:flex;flex-direction:column;gap:18px}
+.ctitle{font-size:24px;font-weight:800}
+.prog{display:flex;align-items:center;gap:0;list-style:none;padding:0;margin:0;flex-wrap:wrap;row-gap:8px}
+.prog li{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--faint)}
+.prog li:not(:last-child)::after{content:"";width:34px;height:3px;border-radius:2px;background:var(--line);margin:0 10px}
+.prog .d{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;background:var(--grey-soft);color:var(--faint)}
+.prog li.done{color:var(--green-ink)}.prog li.done .d{background:var(--green);color:#fff}
+.prog li.done:not(:last-child)::after{background:var(--green)}
+.prog li.now{color:var(--ink)}.prog li.now .d{background:var(--sun);color:#14213d}
+.prog li.stop{color:var(--red-ink)}.prog li.stop .d{background:var(--red);color:#fff}
+.plan{background:var(--surface-2);border-radius:var(--r-sm);padding:12px 16px;font-size:15.5px}
+.plan .lab,.lab{display:block;font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.people{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.pt{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;min-width:0}
+.ptxt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ptxt b{font-size:15.5px}
+.part{font-size:14px;color:var(--mut)}
+.ans{font-size:13px;font-weight:700;margin-top:3px}
+.a-green{color:var(--green-ink)}.a-sun{color:var(--sun-ink)}.a-red{color:var(--red-ink)}.a-blue{color:var(--blue-ink)}.a-grey{color:var(--faint)}
+.mini{font-size:13px;color:var(--mut)}
+.note{border-radius:var(--r-sm);padding:11px 14px;font-size:14.5px}
+.note.blue{background:var(--blue-soft);color:var(--blue-ink)}
+.note.red{background:var(--red-soft);color:var(--red-ink)}
+.turn{border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;background:var(--blue-soft);border:2px solid var(--blue)}
+.turn.done{background:var(--surface-2);border:1px solid var(--line)}
+.turn.soft{background:var(--surface-2);border:1px dashed var(--line-2)}
+.turn h4{margin:0;font:800 19px var(--f-display);color:var(--ink)}
+.turn p{font-size:14.5px;color:var(--mut)}
+.reports{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.rep{border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.rep .rtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+details.more>summary{cursor:pointer;color:var(--blue-ink);font-weight:600;font-size:14.5px;list-style:none;display:inline-flex;gap:8px;align-items:center}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+details.more[open]>summary::before{transform:rotate(45deg)}
+.hist{list-style:none;margin:12px 0 0;padding:0 0 0 16px;border-left:3px solid var(--line);display:flex;flex-direction:column;gap:12px;font-size:14px}
+.hist li{position:relative}
+.hist li::before{content:"";position:absolute;left:-23px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--surface);border:3px solid var(--line-2)}
+.hist li.ok::before{border-color:var(--green);background:var(--green)}
+.log{margin:10px 0 0;padding-left:20px;font-size:13.5px;color:var(--mut);display:flex;flex-direction:column;gap:3px}
+
+/* ---------- post & build ---------- */
+.choose{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:480px){.choose{grid-template-columns:minmax(0,1fr)}}
+.opt{position:relative;border:2.5px solid var(--line);border-radius:var(--r);padding:20px;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--surface);transition:transform .12s}
+.opt:hover{transform:translateY(-2px)}
+.opt input{position:absolute;opacity:0}
+.opt .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;color:#fff}
+.opt b{font:800 21px var(--f-display)}
+.opt span{font-size:14.5px;color:var(--mut)}
+.opt.o-ask .ic{background:var(--coral)}.opt.o-off .ic{background:var(--teal)}
+.opt.o-ask:has(input:checked){border-color:var(--coral);background:var(--coral-soft)}
+.opt.o-off:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
+.opt:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.fields{display:flex;flex-direction:column;gap:16px}
+.field{display:flex;flex-direction:column}
+label.lbl,.lbl{display:block;font-size:14.5px;font-weight:700;color:var(--ink);margin:0 0 6px}
+.lbl .h{font-weight:500;color:var(--mut)}
+input[type=text],input[type=search],textarea,select.inp{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--surface);border:1.5px solid var(--line-2);border-radius:var(--r-sm);padding:11px 13px}
+input.bigin{font-size:18px;padding:14px 16px}
+textarea{resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--faint)}
+input:focus,textarea:focus,select.inp:focus{outline:3px solid var(--blue-soft);border-color:var(--blue)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.check-row{display:inline-flex;align-items:center;gap:10px;font-size:15px;cursor:pointer}
+.check-row input{width:19px;height:19px;accent-color:var(--blue)}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{position:relative;display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line-2);border-radius:99px;padding:8px 15px;font-size:15px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--ink)}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label:has(input:checked){background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.seg label:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.seg.out label:has(input[value=completed]:checked){background:var(--green);border-color:var(--green);color:#fff}
+.seg.out label:has(input[value=partial]:checked){background:var(--sun);border-color:var(--sun);color:#14213d}
+.seg.out label:has(input[value=disputed]:checked){background:var(--red);border-color:var(--red);color:#fff}
+.seg.out label:has(input[value=unresolved]:checked){background:var(--grey);border-color:var(--grey);color:#fff}
+
+.build{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
+@media (max-width:1060px){.build{grid-template-columns:minmax(0,1fr)}}
+.tray{position:sticky;top:150px;border:2.5px solid var(--sun)}
+@media (max-width:1060px){.tray{position:static}}
+.stepno{display:inline-flex;align-items:center;gap:8px;font:800 13px var(--f-display);text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.stepno i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--surface);display:grid;place-items:center;font-size:13px}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:620px){.cols{grid-template-columns:minmax(0,1fr)}}
+.col{display:flex;flex-direction:column;gap:10px;min-width:0}
+.colh{display:flex;align-items:center;gap:8px;font:800 17px var(--f-display)}
+.colh .dot{width:12px;height:12px;border-radius:50%}
+.tile{position:relative;display:flex;gap:12px;align-items:flex-start;border:2px solid var(--line);border-radius:var(--r-sm);padding:13px;background:var(--surface);cursor:pointer;transition:border-color .15s,background .15s,transform .12s;min-width:0}
+.tile:hover{transform:translateY(-1px);border-color:var(--line-2)}
+.tile input{position:absolute;opacity:0;width:1px;height:1px}
+.tile .box{flex:none;width:24px;height:24px;border-radius:8px;border:2px solid var(--line-2);display:grid;place-items:center;margin-top:5px;background:var(--surface)}
+.tile.k-need:has(input:checked){border-color:var(--coral);background:var(--coral-soft)}
+.tile.k-provision:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
+.tile.k-need:has(input:checked) .box{background:var(--coral);border-color:var(--coral)}
+.tile.k-provision:has(input:checked) .box{background:var(--teal);border-color:var(--teal)}
+.tile:has(input:checked) .box::after{content:"";width:10px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.tile:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.tbody{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.ttitle{font-weight:700;font-size:16px;line-height:1.35}
+.tby{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--mut)}
+.tdet{font-size:13.5px;color:var(--mut)}
+.tile.static{cursor:default}.tile.static:hover{transform:none}
+.tile.closed{opacity:.55}
+.trow{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+.trow:first-child{border-top:0;padding-top:0}
+.trow .tm{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.pchip{position:relative;display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line-2);border-radius:99px;padding:3px 12px 3px 3px;font-size:14px;font-weight:600;cursor:pointer;background:var(--surface)}
+.pchip input{position:absolute;opacity:0;width:1px;height:1px}
+.pchip:has(input:checked){border-color:var(--ink);background:var(--ink);color:var(--surface)}
+.pchip:has(input:focus-visible){outline:3px solid var(--blue)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters input[type=search]{flex:1 1 200px;width:auto;border-radius:99px}
+
+/* modal & toast */
+.modal{position:fixed;inset:0;background:rgba(12,17,32,.55);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.mbox{background:var(--surface);color:var(--ink);width:100%;max-width:540px;max-height:90dvh;overflow:auto;border-radius:24px 24px 0 0;padding:24px 22px calc(22px + env(safe-area-inset-bottom,0px));padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px));box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mbox h3{font-size:23px;font-weight:800}
+.mfoot{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+@media (min-width:640px){.modal{align-items:center}.mbox{border-radius:24px}}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:12px 18px;border-radius:99px;font-size:15px;font-weight:600;z-index:30;max-width:calc(100vw - 32px);transition:opacity .3s;box-shadow:0 10px 30px rgba(0,0,0,.3);text-align:center}
+@media (max-width:760px){#toast{bottom:calc(88px + env(safe-area-inset-bottom,0px));border-radius:16px}}
+
+body.simple{font-size:17.5px}
+body.simple .btn{min-height:50px;padding:11px 20px;font-size:16.5px}
+body.simple details.hist-wrap{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top"><div class="topin">
+  <div class="brand"><span class="logo" aria-hidden="true"><i></i><i></i><i></i></span><div><b>Participation Platform</b><span>Help each other. Everyone agrees first.</span></div></div>
+  <label class="switch" id="simpleWrap" hidden><input type="checkbox" id="simple"><span class="knob"></span>Simple mode</label>
+  <div class="whobox"><span class="wholbl">Viewing as</span><div class="who" id="who" role="group" aria-label="Choose who you are pretending to be"></div></div>
+</div></header>
+<nav class="tabs" aria-label="Sections"><div class="tabs-in" id="tabs"></div></nav>
+<main class="wrap" id="view"></main>
+<footer class="store" id="store"></footer>
+<div id="modal" class="modal" hidden></div>
+<div id="toast" role="status" hidden></div>
+
+<script>
+/* ============================================================
+   Participation Platform — simple edition.
+   Same three record types (Declaration, Commitment, Receipt)
+   and the same consent rules as the Council baseline.
+   Plain-language words on screen:
+     Declaration → "ask" / "offer"   Commitment → "team-up"
+     Accept/Revise/Defer/Decline → Yes / Change / Not yet / No
+     Receipt → "how it went"
+   ============================================================ */
+const KEY = 'participation-poc-v3';
+let storageOk = true;
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = p => p + '-' + Math.random().toString(36).slice(2, 8);
+const now = () => new Date().toISOString();
+const fmt = t => new Date(t).toLocaleString([], {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+const clone = o => JSON.parse(JSON.stringify(o));
+const P  = id => S.participants.find(p => p.id === id) || {name:'(unknown)', role:''};
+const nm = id => P(id).name;
+const first = id => nm(id).split(' ')[0];
+const D  = id => S.declarations.find(d => d.id === id);
+const C  = id => S.commitments.find(c => c.id === id);
+const DEC = {
+  accept: {l:"Yes, I'm in", c:'green', i:'✓'},
+  revise: {l:'Wants a change', c:'blue', i:'✎'},
+  defer:  {l:'Not yet', c:'sun', i:'…'},
+  decline:{l:'Said no', c:'red', i:'✕'}
+};
+const NONE = {l:'Hasn’t answered', c:'grey', i:'?'};
+const DLABEL = {accept:'Said yes', revise:'Suggested a change', defer:'Said not yet', decline:'Said no'};
+const OUT = {completed:'All done', partial:'Partly done', disputed:'I disagree', unresolved:'Not sorted yet'};
+const OUTP = {completed:'p-ok', partial:'p-wait', disputed:'p-bad', unresolved:'p-grey'};
+const hue = id => { let h = 11; for (const ch of String(id)) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
+const ini = n => String(n).replace(/\(.*?\)/g, '').trim().split(/\s+/).map(w => w[0] || '').slice(0, 2).join('').toUpperCase() || '?';
+const av = (id, cls = '') => `<span class="av ${cls}" style="--h:${hue(id)}" aria-hidden="true">${esc(ini(nm(id)))}</span>`;
+const face = (id, d, cls = '') => { const m = d ? DEC[d.d] : NONE; return `<span class="face" title="${esc(nm(id))}: ${esc(m.l)}">${av(id, cls)}<span class="b b-${m.c}" aria-hidden="true">${m.i}</span></span>`; };
+const svg = p => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+const IC = {
+  home: svg('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'),
+  ask:  svg('<path d="M4 5h16v11H10l-6 4z"/><path d="M10 9a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9v.4"/><path d="M12 14.2v.1"/>'),
+  offer:svg('<rect x="3.5" y="9" width="17" height="11" rx="2"/><path d="M3.5 13h17M12 9v11"/><path d="M12 9C10 5 6 5 6 7.4S10 9 12 9zm0 0c2-4 6-4 6-1.6S14 9 12 9z"/>'),
+  team: svg('<circle cx="8" cy="10" r="4"/><circle cx="16" cy="10" r="4"/><circle cx="12" cy="16.5" r="4"/>'),
+  done: svg('<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>')
+};
+
+/* ---------- persistence (browser-local, NOT secure or shared) ---------- */
+function load(){ try { const t = localStorage.getItem(KEY); return t ? JSON.parse(t) : null; } catch(e){ storageOk = false; return null; } }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){ storageOk = false; } }
+
+/* ---------- seed data: people, posts, and one team-up already under way ---------- */
+function seed(){
+  const t = now();
+  const p = (id, name, role) => ({id, name, role});
+  const d = (id, by, kind, scope, title, context='', availability='', conditions='', expectations='') =>
+    ({id, by, kind, scope, title, context, availability, conditions, expectations, open:true, at:t});
+  const contribs = [
+    {pid:'maya', declId:'d-faucet', text:'Needs the tap fixed. Will be home to let everyone in.', necessary:true},
+    {pid:'joe',  declId:'d-diag',   text:'Will check the tap and fit the new part.', necessary:true},
+    {pid:'lena', declId:'d-part',   text:'Will supply a new cartridge.', necessary:true},
+    {pid:'sam',  declId:'d-deliv',  text:'Will bring the part over by bike.', necessary:true}
+  ];
+  const terms = "Thursday after 6pm at Maya's place. The cartridge costs about $14, paid at pickup.";
+  const example = {
+    id:'c-tap', title:"Fix Maya's leaking tap", scope:'world', version:1, terms, contributions:contribs, affected:[],
+    decisions:{ joe:{d:'accept', note:'', revisit:'', v:1, at:t}, sam:{d:'defer', note:'', revisit:"When I know Thursday's plans", v:1, at:t} },
+    decisionLog:[{pid:'joe', d:'accept', note:'', revisit:'', v:1, at:t}, {pid:'sam', d:'defer', note:'', revisit:"When I know Thursday's plans", v:1, at:t}],
+    concerns:[], versions:[{v:1, terms, contributions:clone(contribs), by:'maya', at:t, note:'First plan'}],
+    log:[{at:t, by:'maya', v:1, type:'propose', text:'Started this team-up'},
+         {at:t, by:'joe', v:1, type:'accept', text:'Said yes'},
+         {at:t, by:'sam', v:1, type:'defer', text:"Said not yet · will decide: When I know Thursday's plans"}],
+    createdBy:'maya', at:t, confirmedV:null
+  };
+  return {
+    participants: [
+      p('maya','Maya','Household'), p('joe','Joe','Neighbour'), p('lena','Lena','Hardware shop'),
+      p('sam','Sam','Helper'), p('priya','Priya','App user'), p('omar','Omar','App user'),
+      p('dev','Dev','Looks after the app')
+    ],
+    me: 'maya', tab: 'home', prefs: {},
+    platform: { maintainers: ['dev'], features: {} },
+    declarations: [
+      d('d-faucet','maya','need','world','My kitchen tap is leaking','Single-handle tap, dripping all day','Weekday evenings after 6pm','Someone must be home to let people in','Leak stopped this week'),
+      d('d-diag','joe','provision','world','I can fix basic plumbing','I fix my own taps','Tue / Thu evenings','Neighbours within a few blocks','Nothing needed in return'),
+      d('d-part','lena','provision','world','Tap cartridges and washers','Most common brands in stock','Shop hours 9–6','Price as marked, paid at pickup',''),
+      d('d-deliv','sam','provision','world','Local delivery by bike','Small parcels around the neighbourhood','Evenings','Items under 5 kg','Tips welcome, not required'),
+      d('d-simple','priya','need','platform','I need a simpler screen','Too many boxes to fill when I post','','','Post something in under a minute'),
+      d('d-detail','omar','need','platform','Please keep the detailed fields','I use them to explain conditions','','','Simpler must not remove detail for people who want it'),
+      d('d-impl','dev','provision','platform','I can change how the app looks','I look after this app','This week','Changes must be easy to undo','')
+    ],
+    commitments: [example],
+    receipts: []
+  };
+}
+
+let S = load() || seed();
+let draft = {sel:[], vals:{}};
+let filt = {scope:'all', q:''};
+let prefill = null;
+let resetArmed = false;
+let jumpTo = null;
+
+/* ---------- protocol: same rules as the baseline ---------- */
+const cpids  = c => [...new Set(c.contributions.map(x => x.pid))];
+const necPids = c => [...new Set(c.contributions.filter(x => x.necessary).map(x => x.pid))];
+const decOf = (c, pid) => { const d = c.decisions[pid]; return d && d.v === c.version ? d : null; };
+function status(c){
+  const nec = necPids(c);
+  if (!nec.length) return {k:'pending', missing:[]};
+  const declined = nec.filter(p => decOf(c,p)?.d === 'decline');
+  if (declined.length) return {k:'declined', declined, missing:[]};
+  const missing = nec.filter(p => decOf(c,p)?.d !== 'accept');   // "not yet" is not a yes
+  if (!missing.length) return {k:'confirmed', missing};
+  return {k:'pending', missing};
+}
+function log(c, type, text, by = S.me){ c.log.push({at:now(), by, v:c.version, type, text}); }
+function decide(c, d, note = '', revisit = ''){
+  if (!cpids(c).includes(S.me)) return;
+  if (d === 'defer' && !revisit.trim()) return;
+  c.decisions[S.me] = {d, note, revisit, v:c.version, at:now()};
+  c.decisionLog.push({pid:S.me, d, note, revisit, v:c.version, at:now()});
+  log(c, d, `${DLABEL[d]}${note ? ' — “' + note + '”' : ''}${revisit ? ' · will decide: ' + revisit : ''}`);
+  if (status(c).k === 'confirmed' && c.confirmedV !== c.version){
+    c.confirmedV = c.version;
+    c.versions.find(x => x.v === c.version).confirmedAt = now();
+    log(c, 'confirmed', 'Everyone said yes. The plan is agreed.', null);
+  }
+}
+function newVersion(c, mutate, note){
+  mutate(c);
+  c.version++;
+  c.versions.push({v:c.version, terms:c.terms, contributions:clone(c.contributions), by:S.me, at:now(), note});
+  log(c, 'version', `Changed the plan${note ? ': ' + note : ''}. Everyone is asked again.`);
+}
+
+/* ---------- plain-language status ---------- */
+function plain(c){
+  const st = status(c);
+  if (st.k === 'confirmed') return {cls:'ok', t:"Everyone's in!", sub:'The plan is agreed', p:'p-ok', short:"Everyone's in"};
+  if (st.k === 'declined') return {cls:'bad', t:'On hold', sub:st.declined.map(first).join(', ') + ' said no', p:'p-bad', short:'On hold'};
+  const n = st.missing.length;
+  return {cls:'wait', t:`Waiting for ${n} ${n === 1 ? 'person' : 'people'}`, sub:st.missing.map(first).join(', '), p:'p-wait', short:`Waiting for ${n}`};
+}
+const involved = c => cpids(c).includes(S.me) || c.affected.includes(S.me);
+function myQueues(){
+  const mine = S.commitments.filter(c => cpids(c).includes(S.me));
+  const decide = mine.filter(c => { const d = decOf(c, S.me); return status(c).k !== 'confirmed' && (!d || d.d !== 'accept'); });
+  const outcome = S.commitments.filter(c => involved(c) && c.confirmedV && !S.receipts.some(r => r.cid === c.id && r.by === S.me));
+  const acks = S.receipts.filter(r => r.by !== S.me && !r.acks.some(a => a.by === S.me) && C(r.cid) && involved(C(r.cid)));
+  return {decide, outcome, acks, total: decide.length + outcome.length + acks.length};
+}
+
+/* ---------- pieces ---------- */
+function tile(d, mode){
+  const detail = [d.availability, d.conditions].filter(Boolean).join(' · ');
+  const body = `<div class="tbody">
+      <div class="row" style="gap:6px"><span class="pill ${d.kind === 'need' ? 'p-ask' : 'p-offer'}">${d.kind === 'need' ? 'Needs help' : 'Can help'}</span>${d.scope === 'platform' ? '<span class="pill p-app">About this app</span>' : ''}${d.open ? '' : '<span class="pill p-grey">Taken down</span>'}</div>
+      <div class="ttitle">${esc(d.title)}</div>
+      <div class="tby">${av(d.by, 'sm')}${esc(nm(d.by))}${d.by === S.me ? '<span class="you">you</span>' : ''}</div>
+      ${detail ? `<div class="tdet">${esc(detail)}</div>` : ''}
+      ${mode === 'own' ? `<div class="row" style="margin-top:6px"><button class="btn sm" data-act="toggleDecl" data-id="${esc(d.id)}">${d.open ? 'Take it down' : 'Put it back up'}</button></div>` : ''}
+    </div>`;
+  if (mode === 'sel') return `<label class="tile k-${d.kind}"><input type="checkbox" data-sel="${esc(d.id)}" ${draft.sel.includes(d.id) ? 'checked' : ''}><span class="box" aria-hidden="true"></span>${body}</label>`;
+  return `<div class="tile static k-${d.kind} ${d.open ? '' : 'closed'}">${body}</div>`;
+}
+
+function card(c, o = {}){
+  const st = status(c), ps = plain(c), me = S.me;
+  const isC = cpids(c).includes(me), isA = c.affected.includes(me);
+  const hasR = S.receipts.some(r => r.cid === c.id);
+  const prog = [
+    ['Planned', 'done'],
+    ['Everyone agrees', st.k === 'confirmed' || c.confirmedV ? 'done' : st.k === 'declined' ? 'stop' : 'now'],
+    ['How it went', hasR ? 'done' : c.confirmedV ? 'now' : '']
+  ].map(([l, s], i) => `<li class="${s}"><span class="d">${s === 'done' ? '✓' : s === 'stop' ? '✕' : i + 1}</span>${l}</li>`).join('');
+
+  const people = c.contributions.map(x => {
+    const d = decOf(c, x.pid), m = d ? DEC[d.d] : NONE;
+    return `<li class="pt">${face(x.pid, d, 'lg')}<div class="ptxt"><b>${esc(nm(x.pid))}${x.pid === me ? '<span class="you">you</span>' : ''}</b>
+      <span class="part">${esc(x.text)}</span>
+      <span class="ans a-${m.c}">${m.l}${x.necessary ? '' : ' · optional'}</span>
+      ${d && d.revisit ? `<span class="mini">Will decide: ${esc(d.revisit)}</span>` : ''}
+      ${d && d.note ? `<span class="mini">“${esc(d.note)}”</span>` : ''}</div></li>`;
+  }).join('');
+
+  let turn = '';
+  if (isC){
+    const mine = decOf(c, me)?.d;
+    const head = !mine ? `Your turn, ${esc(first(me))}. Are you in?`
+      : mine === 'accept' ? (st.k === 'confirmed' ? 'You said yes. All agreed.' : 'You said yes. Waiting for the others.')
+      : `You answered “${DEC[mine].l}”. Want to change your answer?`;
+    turn = `<div class="turn ${mine === 'accept' ? 'done' : ''}"><h4>${head}</h4>
+      ${!mine ? '<p>Nothing happens until everyone needed says yes.</p>' : ''}
+      <div class="row">
+        <button class="btn yes ${mine === 'accept' ? 'on' : ''}" data-act="accept" data-id="${esc(c.id)}" aria-pressed="${mine === 'accept'}">✓ Yes, I'm in</button>
+        <button class="btn change ${mine === 'revise' ? 'on' : ''}" data-act="revise" data-id="${esc(c.id)}">Change something</button>
+        <button class="btn later ${mine === 'defer' ? 'on' : ''}" data-act="defer" data-id="${esc(c.id)}">Not yet</button>
+        <button class="btn no ${mine === 'decline' ? 'on' : ''}" data-act="decline" data-id="${esc(c.id)}">No</button>
+      </div></div>`;
+  } else if (isA){
+    turn = `<div class="turn soft"><h4>This affects you</h4><p>You can share a worry and ask for a change. You can't block it.</p>
+      <div class="row"><button class="btn" data-act="concern" data-id="${esc(c.id)}">Share a worry</button></div></div>`;
+  } else {
+    turn = `<div class="turn soft"><h4>You're not part of this</h4><p>Join in with something you can do, or say it affects you.</p>
+      <div class="row"><button class="btn" data-act="join" data-id="${esc(c.id)}">Join in</button><button class="btn" data-act="affected" data-id="${esc(c.id)}">It affects me</button></div></div>`;
+  }
+  let after = '';
+  if (c.confirmedV && (isC || isA)){
+    const mineR = S.receipts.some(r => r.cid === c.id && r.by === me);
+    after += `<button class="btn ${mineR ? '' : 'dark'}" data-act="receipt" data-id="${esc(c.id)}">${IC.done}${mineR ? 'Add another update' : 'Tell everyone how it went'}</button>`;
+  }
+  if (o.exp && involved(c)) after += `<button class="btn ghost" data-act="followup" data-id="${esc(c.id)}">Ask for more help</button>`;
+
+  const notes = (c.confirmedV && c.confirmedV !== c.version
+      ? `<div class="note blue">Someone suggested a change. Until everyone agrees to it, the earlier agreed plan still stands.</div>` : '')
+    + (st.k === 'declined' ? `<div class="note red">${esc(ps.sub)}. Someone can change the plan, or they can change their answer.</div>` : '');
+
+  const worries = c.concerns.length ? `<div><span class="lab">Worries raised</span><ul class="reports">${c.concerns.map(k =>
+    `<li class="rep"><div class="rtop">${av(k.by, 'sm')}<b>${esc(nm(k.by))}</b>${k.req ? '<span class="pill p-blue">Asks for a change</span>' : ''}</div><div>${esc(k.text)}</div></li>`).join('')}</ul></div>` : '';
+
+  const rs = S.receipts.filter(r => r.cid === c.id);
+  const reports = rs.length ? `<div><span class="lab">How it went · everyone tells their own side</span><ul class="reports">${rs.map(r => {
+    const canAck = r.by !== me && (isC || isA) && !r.acks.some(a => a.by === me);
+    return `<li class="rep"><div class="rtop">${av(r.by, 'sm')}<b>${esc(nm(r.by))}</b><span class="pill ${OUTP[r.outcome] || 'p-grey'}">${esc(OUT[r.outcome] || r.outcome)}</span></div>
+      <div>${esc(r.provided)}</div>
+      ${r.ack ? `<div class="muted">“${esc(r.ack)}”</div>` : ''}
+      ${r.unresolved ? `<div class="a-red"><b>Still not sorted:</b> ${esc(r.unresolved)}</div>` : ''}
+      <div class="row small muted">Seen by ${r.acks.map(a => esc(first(a.by))).join(', ') || 'nobody yet'}${canAck ? ` <button class="btn sm" data-act="ack" data-rid="${esc(r.id)}">I've seen this</button>` : ''}</div></li>`; }).join('')}</ul></div>` : '';
+
+  const versions = c.versions.slice().reverse().map(v =>
+    `<li class="${v.confirmedAt ? 'ok' : ''}"><b>Plan ${v.v}</b>${v.confirmedAt ? ' <span class="pill p-ok">Agreed</span>' : ''} <span class="muted">by ${esc(first(v.by))}, ${fmt(v.at)}</span>
+      ${v.note ? `<div>${esc(v.note)}</div>` : ''}<div class="muted">${esc(v.terms) || '<i>No plan written</i>'}</div></li>`).join('');
+
+  return `<article class="ccard" id="c-${esc(c.id)}">
+    <div class="cband ${ps.cls}">${ps.t}<span class="sub">${esc(ps.sub)}</span>${c.scope === 'platform' ? '<span class="tagw">About this app</span>' : ''}</div>
+    <div class="cmain">
+      <div style="display:flex;flex-direction:column;gap:12px"><h3 class="ctitle">${esc(c.title)}</h3><ol class="prog" aria-label="Progress">${prog}</ol></div>
+      <div class="plan"><span class="lab">The plan</span>${esc(c.terms) || '<i class="muted">No plan written yet</i>'}</div>
+      <div><span class="lab">Who's involved</span><ul class="people">${people}</ul></div>
+      ${c.affected.length ? `<div class="small muted">Also affected (can share worries, can't block): ${c.affected.map(first).map(esc).join(', ')}</div>` : ''}
+      ${notes}${turn}${worries}${reports}
+      ${after ? `<div class="row">${after}</div>` : ''}
+      <details class="more hist-wrap"><summary>See full history (${c.versions.length} plan${c.versions.length > 1 ? 's' : ''})</summary>
+        <ul class="hist">${versions}</ul>
+        <ol class="log">${c.log.map(l => `<li>${fmt(l.at)} · ${l.by ? esc(first(l.by)) : '<b>App</b>'}: ${esc(l.text)}</li>`).join('')}</ol>
+      </details>
+    </div></article>`;
+}
+function crow(c){
+  const ps = plain(c);
+  return `<button class="crow" data-act="open" data-id="${esc(c.id)}"><span class="tt">${esc(c.title)}</span>
+    <span class="stack">${c.contributions.map(x => face(x.pid, decOf(c, x.pid), 'sm')).join('')}</span>
+    <span class="pill ${ps.p}">${ps.short}</span></button>`;
+}
+
+/* ---------- screens ---------- */
+const TABS = [
+  {id:'home', l:'Home', ic:'home'},
+  {id:'post', l:'Ask or offer', ic:'ask'},
+  {id:'team', l:'Team up', ic:'team'},
+  {id:'done', l:'How it went', ic:'done'}
+];
+
+const VIEWS = {
+  home(){
+    const q = myQueues();
+    const all = S.commitments;
+    const f = S.platform.features.simple;
+    const follow = [
+      ...q.outcome.map(c => `<div class="todo"><span class="pill p-ok">Everyone's in</span><span class="tt">${esc(c.title)}</span><button class="btn sm dark" data-act="receipt" data-id="${esc(c.id)}">Tell how it went</button></div>`),
+      ...q.acks.map(r => `<div class="todo"><span class="pill ${OUTP[r.outcome] || 'p-grey'}">${esc(OUT[r.outcome] || '')}</span><span class="tt">${esc(first(r.by))} shared how “${esc(C(r.cid).title)}” went</span><button class="btn sm" data-act="ack" data-rid="${esc(r.id)}">I've seen this</button></div>`)
+    ].join('');
+    const as = (id, txt) => `<button class="btn sm" data-act="as" data-p="${id}">${av(id, 'sm')}${txt}</button>`;
+    return `
+    <section class="hero">
+      <div>
+        <h1>People <span class="hl">ask</span>. People <span class="hl2">offer</span>. Nothing happens until everyone says yes.</h1>
+        <p class="lead">Post what you need or what you can do. Team up with others. Everyone involved agrees before anything is final, and afterwards each person shares how it went.</p>
+        <div class="row"><button class="btn big coral" data-act="post" data-k="need">${IC.ask}I need help</button><button class="btn big teal" data-act="post" data-k="provision">${IC.offer}I can help</button></div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="bub ask">${av('maya')}<div><b>Maya needs</b>My kitchen tap is leaking</div></div>
+        <div class="bub off1">${av('joe')}<div><b>Joe offers</b>I can fix basic plumbing</div></div>
+        <div class="bub off2">${av('lena')}<div><b>Lena offers</b>Tap cartridges and washers</div></div>
+        <div class="bub team"><b>Team-up</b><span class="t">Fix Maya's leaking tap</span>
+          <span class="faces">${['maya','joe','lena','sam'].map(id => av(id, 'sm')).join('')}</span></div>
+      </div>
+    </section>
+
+    <section class="blk"><div class="shead"><span class="eyebrow a-red" style="color:var(--coral-ink)">For ${esc(first(S.me))}</span><h2>${q.total ? `${q.total} thing${q.total > 1 ? 's' : ''} need${q.total > 1 ? '' : 's'} you` : 'All caught up'}</h2></div>
+      ${q.decide.length ? `<div class="clist">${q.decide.map(c => card(c)).join('')}</div>` : ''}
+      ${follow ? `<div class="panel">${follow}</div>` : ''}
+      ${!q.total ? `<div class="empty">Nothing is waiting on ${esc(first(S.me))} right now. Try viewing as someone else at the top.</div>` : ''}
+    </section>
+
+    <section class="blk"><div class="shead"><h2>How it works</h2><p>Four simple steps. The same steps work for fixing a tap, running a business, or changing this app.</p></div>
+      <ol class="how">
+        <li class="h1"><span class="ic">${IC.ask}</span><span class="n">Step 1</span><h3>Ask</h3><p>Say what you need, in one sentence.</p></li>
+        <li class="h2"><span class="ic">${IC.offer}</span><span class="n">Step 2</span><h3>Offer</h3><p>Say what you can do, share or bring.</p></li>
+        <li class="h3"><span class="ic">${IC.team}</span><span class="n">Step 3</span><h3>Team up</h3><p>Put asks and offers together into one plan. Everyone needed must say yes.</p></li>
+        <li class="h4"><span class="ic">${IC.done}</span><span class="n">Step 4</span><h3>Share how it went</h3><p>Each person tells their own side. Nobody else decides if it worked for you.</p></li>
+      </ol></section>
+
+    <section class="blk"><div class="shead"><h2>All team-ups</h2></div>
+      ${all.length ? `<div class="clist">${all.map(crow).join('')}</div>` : '<div class="empty">No team-ups yet.<button class="btn sm" data-act="tab" data-tab="team">Start one</button></div>'}</section>
+
+    <div class="grid2">
+      <section class="panel"><div class="shead" style="margin-bottom:16px"><h3>Try it yourself</h3><p class="small">Pretend to be different people with the buttons below.</p></div>
+        <ol class="try">
+          <li><div>Be <b>Lena</b>. Say yes, or tap “Change something” to set the price.<div class="row">${as('lena', 'Be Lena')}</div></div></li>
+          <li><div>Be <b>Sam</b> and say yes.<div class="row">${as('sam', 'Be Sam')}</div></div></li>
+          <li><div>Be <b>Maya</b> and say yes. Now everyone's in.<div class="row">${as('maya', 'Be Maya')}</div></div></li>
+          <li><div>Tell everyone how it went. Try “Partly done”: the leak slowed but still drips.</div></li>
+          <li><div>Be <b>Priya</b> and team up with Dev to make this app simpler. Omar can share a worry.<div class="row">${as('priya', 'Be Priya')}${as('omar', 'Be Omar')}</div></div></li>
+        </ol></section>
+      <section class="panel" style="display:flex;flex-direction:column;gap:14px"><span class="pill p-app" style="align-self:flex-start">About this app</span><h3>The app improves the same way</h3>
+        <p class="muted">Changes to this app go through the same steps: someone asks, someone offers, everyone affected can speak up.</p>
+        <div class="todo" style="padding:0;border:0"><span class="tt">Simple mode</span><span class="pill ${f ? 'p-ok' : 'p-grey'}">${f ? 'Switched on' : 'Not built yet'}</span></div>
+        <p class="small muted">${f ? 'Each person can turn it on or off at the top of the screen.' : 'Priya asked for a simpler screen. Dev can build it once they team up.'}</p>
+        <div class="row"><button class="btn" data-act="post" data-k="need" data-scope="platform">Suggest an improvement</button></div></section>
+    </div>
+
+    <details class="more panel"><summary>Demo settings</summary>
+      <div class="fields" style="margin-top:16px">
+        <div><span class="lbl">People in this demo</span><div class="chips">${S.participants.map(p => `<span class="pchip" style="cursor:default">${av(p.id, 'sm')}${esc(p.name)} <span class="muted small" style="font-weight:500">${esc(p.role)}</span></span>`).join('')}</div></div>
+        <form id="addP" class="row"><input type="text" id="np-name" name="name" placeholder="Name" required style="flex:1 1 140px;width:auto" aria-label="Name"><input type="text" id="np-role" name="role" placeholder="Role (optional)" style="flex:1 1 140px;width:auto" aria-label="Role"><button class="btn">Add person</button></form>
+        <div class="row"><button class="btn" data-act="export">Copy all data</button><button class="btn" data-act="importPick">Load data from a file</button><input type="file" id="importFile" accept=".json,application/json" hidden>
+          <button class="btn danger ${resetArmed ? 'on' : ''}" data-act="reset">${resetArmed ? 'Tap again to start over' : 'Start the demo over'}</button></div>
+      </div></details>`;
+  },
+
+  post(){
+    const pf = prefill || {}; prefill = null;
+    const mine = S.declarations.filter(d => d.by === S.me);
+    return `<div class="grid2">
+      <section class="panel"><form id="declForm" class="fields">
+        <h2>What would you like to do?</h2>
+        <div class="choose" role="radiogroup" aria-label="Ask or offer">
+          <label class="opt o-ask"><input type="radio" name="kind" value="need" ${pf.kind !== 'provision' ? 'checked' : ''}><span class="ic">${IC.ask}</span><b>I need help</b><span>Ask for something</span></label>
+          <label class="opt o-off"><input type="radio" name="kind" value="provision" ${pf.kind === 'provision' ? 'checked' : ''}><span class="ic">${IC.offer}</span><b>I can help</b><span>Offer a skill, item or time</span></label>
+        </div>
+        <div class="field"><label class="lbl" for="f-title">Say it in one sentence</label><input class="bigin" id="f-title" type="text" name="title" required value="${esc(pf.title || '')}" placeholder="e.g. My kitchen tap is leaking"></div>
+        <label class="check-row"><input type="checkbox" name="scope" value="platform" ${pf.scope === 'platform' ? 'checked' : ''}> This is about improving this app</label>
+        <details class="more"><summary>Add more detail (optional)</summary><div class="two" style="margin-top:14px">
+          <div class="field"><label class="lbl" for="f-context">What's the situation?</label><textarea id="f-context" name="context" rows="2"></textarea></div>
+          <div class="field"><label class="lbl" for="f-avail">When are you free?</label><input id="f-avail" type="text" name="availability" placeholder="e.g. Weekday evenings"></div>
+          <div class="field"><label class="lbl" for="f-cond">Any conditions or price?</label><input id="f-cond" type="text" name="conditions" placeholder="e.g. $14, paid at pickup"></div>
+          <div class="field"><label class="lbl" for="f-exp">What would “done” look like?</label><input id="f-exp" type="text" name="expectations" placeholder="e.g. Leak stopped this week"></div></div></details>
+        <div class="row"><button class="btn big dark">Post it</button></div>
+      </form></section>
+      <section class="blk"><div class="shead"><h2>Your posts</h2><p>Others can find these when they team up.</p></div>
+        ${mine.map(d => tile(d, 'own')).join('') || '<div class="empty">You haven\'t posted anything yet.</div>'}</section></div>`;
+  },
+
+  team(){
+    const cs = S.commitments.filter(c => filt.scope === 'all' || c.scope === filt.scope);
+    return `<section class="blk"><div class="shead"><h2>Team up</h2><p>Pick an ask and the offers that could solve it, then write a short plan. It only goes ahead when everyone needed says yes.</p></div>
+      <div class="filters"><div class="seg" role="radiogroup" aria-label="Show">
+        ${[['all','Everything'],['world','Everyday life'],['platform','About this app']].map(([v, l]) => `<label><input type="radio" name="fScope" value="${v}" ${filt.scope === v ? 'checked' : ''}>${l}</label>`).join('')}</div>
+        <input id="fQ" type="search" placeholder="Search" value="${esc(filt.q)}" aria-label="Search asks and offers"></div>
+      <div class="build">
+        <div class="panel"><span class="stepno"><i>1</i>Pick who's involved</span><div id="dlist" style="margin-top:16px"></div></div>
+        <aside class="panel tray"><span class="stepno"><i>2</i>Make the plan</span><form id="builder" style="margin-top:16px"></form></aside>
+      </div></section>
+      <section class="blk"><div class="shead"><h2>Team-ups</h2></div><div id="clist" class="clist"></div></section>`;
+  },
+
+  done(){
+    const mine = S.commitments.filter(involved);
+    const open = S.receipts.filter(r => r.by === S.me && r.unresolved);
+    return `<section class="blk"><div class="shead"><h2>How it went</h2><p>Your experience is yours. Say what happened for you, let others know you've seen their updates, and ask for more help if something isn't sorted.</p></div>
+      ${open.length ? `<div class="panel"><span class="lab">Still not sorted for you</span>${open.map(r => `<div class="todo"><span class="pill p-bad">Open</span><span class="tt">${esc(r.unresolved)}</span><span class="small muted">${esc(C(r.cid)?.title)}</span></div>`).join('')}</div>` : ''}
+      ${mine.length ? `<div class="clist">${mine.map(c => card(c, {exp:true})).join('')}</div>` : `<div class="empty">${esc(first(S.me))} isn't in any team-ups yet.<button class="btn sm" data-act="tab" data-tab="team">Go to Team up</button></div>`}</section>`;
+  }
+};
+
+function renderDList(){
+  const el = $('#dlist'); if (!el) return;
+  const q = filt.q.toLowerCase();
+  const ds = S.declarations.filter(d => d.open && (filt.scope === 'all' || d.scope === filt.scope) &&
+    (!q || [d.title, d.context, d.conditions, d.expectations, nm(d.by)].join(' ').toLowerCase().includes(q)));
+  const g = (k, label, color) => { const items = ds.filter(d => d.kind === k);
+    return `<div class="col"><div class="colh"><span class="dot" style="background:var(--${color})"></span>${label}</div>${items.map(d => tile(d, 'sel')).join('') || '<p class="small muted">Nothing here.</p>'}</div>`; };
+  el.innerHTML = `<div class="cols">${g('need', 'People asking', 'coral')}${g('provision', 'People offering', 'teal')}</div>`;
+}
+function renderCList(){
+  const el = $('#clist'); if (!el) return;
+  const cs = S.commitments.filter(c => filt.scope === 'all' || c.scope === filt.scope);
+  el.innerHTML = cs.map(c => card(c)).join('') || '<div class="empty">No team-ups yet. Pick some asks and offers above.</div>';
+}
+function captureBuilder(){
+  const f = $('#builder'); if (!f) return;
+  f.querySelectorAll('input,textarea').forEach(el => { if (el.name) draft.vals[el.name] = el.type === 'checkbox' ? el.checked : el.value; });
+}
+function builderInfo(){
+  const ds = draft.sel.map(D).filter(Boolean);
+  const scope = ds.some(d => d.scope === 'platform') ? 'platform' : 'world';
+  const pids = [...new Set(ds.map(d => d.by))];
+  return {ds, scope, pids, others: S.participants.filter(p => !pids.includes(p.id))};
+}
+function renderBuilder(){
+  const f = $('#builder'); if (!f) return;
+  const {ds, scope, pids, others} = builderInfo();
+  if (!ds.length){ f.innerHTML = '<div class="empty" style="padding:20px">Tick at least one ask and one offer from different people.</div>'; return; }
+  const v = (k, def) => draft.vals[k] ?? def;
+  const need = ds.find(d => d.kind === 'need');
+  f.innerHTML = `<div class="fields">
+    <div class="field"><label class="lbl" for="b-title">Name this team-up</label><input id="b-title" type="text" name="title" value="${esc(v('title', need ? need.title : ds[0].title))}"></div>
+    <div class="field"><label class="lbl" for="b-terms">The plan <span class="h">· what, when, any cost</span></label><textarea id="b-terms" name="terms" rows="3" placeholder="e.g. Thursday after 6pm. Part costs $14.">${esc(v('terms', ''))}</textarea></div>
+    <div><span class="lbl">Who does what</span>${ds.map(d => `<div class="trow">${av(d.by)}<div class="tm"><b>${esc(nm(d.by))}</b>
+      <input type="text" id="t_${esc(d.id)}" name="t_${esc(d.id)}" aria-label="What ${esc(nm(d.by))} does" value="${esc(v('t_' + d.id, d.kind === 'need' ? 'Needs: ' + d.title : d.title))}">
+      <label class="switch"><input type="checkbox" name="n_${esc(d.id)}" ${v('n_' + d.id, true) ? 'checked' : ''}><span class="knob"></span>Must say yes</label></div></div>`).join('')}</div>
+    ${others.length ? `<div><span class="lbl">Who else should know? <span class="h">They can share worries but can't block it</span></span><div class="chips">${others.map(p =>
+      `<label class="pchip"><input type="checkbox" name="a_${esc(p.id)}" ${v('a_' + p.id, scope === 'platform') ? 'checked' : ''}>${av(p.id, 'sm')}${esc(first(p.id))}</label>`).join('')}</div></div>` : ''}
+    ${pids.length < 2 ? '<div class="note blue">Add something from at least one more person.</div>' : ''}
+    <div class="row"><button class="btn big sun" ${pids.length < 2 ? 'disabled' : ''}>${IC.team}Start this team-up</button><button type="button" class="btn ghost" data-act="clearDraft">Clear</button></div></div>`;
+}
+
+function render(){
+  captureBuilder();
+  document.body.classList.toggle('simple', !!(S.platform.features.simple && S.prefs[S.me]?.simple));
+  if (!VIEWS[S.tab]) S.tab = 'home';
+  $('#who').innerHTML = S.participants.map(p => `<button class="wbtn ${p.id === S.me ? 'on' : ''}" data-act="as" data-p="${esc(p.id)}" aria-pressed="${p.id === S.me}" title="${esc(p.name)} · ${esc(p.role)}">${av(p.id)}<span>${esc(first(p.id))}</span></button>`).join('');
+  $('#simpleWrap').hidden = !S.platform.features.simple;
+  $('#simple').checked = !!S.prefs[S.me]?.simple;
+  const n = myQueues().total;
+  $('#tabs').innerHTML = TABS.map(t => `<button class="tab ${S.tab === t.id ? 'on' : ''}" data-act="tab" data-tab="${t.id}" ${S.tab === t.id ? 'aria-current="page"' : ''}>${IC[t.ic]}${t.l}${t.id === 'home' && n ? `<span class="count">${n}</span>` : ''}</button>`).join('');
+  $('#view').innerHTML = VIEWS[S.tab]();
+  renderDList(); renderCList(); renderBuilder();
+  $('#store').textContent = storageOk
+    ? 'This is a demo. Everything is saved in this browser only, and the people are pretend.'
+    : 'Your browser is blocking storage, so changes will be lost when you refresh.';
+  if (jumpTo){ const el = document.getElementById('c-' + jumpTo); jumpTo = null; if (el) el.scrollIntoView({block:'start'}); }
+}
+
+/* ---------- modal & toast ---------- */
+function modal(title, body, submitLabel, onSubmit, btnCls = 'dark'){
+  const m = $('#modal');
+  m.innerHTML = `<div class="mbox" role="dialog" aria-modal="true" aria-label="${esc(title)}"><form id="mform" class="fields"><h3>${esc(title)}</h3>${body}
+    <div class="mfoot"><button type="button" class="btn ghost" data-act="closeModal">Cancel</button><button class="btn ${btnCls}">${esc(submitLabel)}</button></div></form></div>`;
+  m.hidden = false;
+  const fst = m.querySelector('textarea,input[type=text]'); if (fst) fst.focus();
+  $('#mform').onsubmit = e => {
+    e.preventDefault();
+    const fd = new FormData(e.target), f = {};
+    for (const [k, v] of fd) f[k] = typeof v === 'string' ? v.trim() : v;
+    if (onSubmit(f) !== false){ closeModal(); save(); render(); }
+  };
+}
+function closeModal(){ $('#modal').hidden = true; $('#modal').innerHTML = ''; }
+let toastT;
+function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; el.style.opacity = 1; clearTimeout(toastT); toastT = setTimeout(() => { el.style.opacity = 0; setTimeout(() => el.hidden = true, 300); }, 2800); }
+function done(msg){ save(); render(); if (msg) toast(msg); }
+const fld = (id, label, input) => `<div class="field"><label class="lbl" for="${id}">${label}</label>${input}</div>`;
+
+/* ---------- events ---------- */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const a = b.dataset.act, c = b.dataset.id ? C(b.dataset.id) : null;
+  if (a !== 'reset') resetArmed = false;
+  switch (a){
+    case 'tab': S.tab = b.dataset.tab; done(); scrollTo(0, 0); break;
+    case 'as': S.me = b.dataset.p; done('You are now ' + nm(S.me)); break;
+    case 'open': S.tab = 'team'; jumpTo = b.dataset.id; done(); break;
+    case 'post': prefill = {kind:b.dataset.k, scope:b.dataset.scope}; S.tab = 'post'; done(); scrollTo(0, 0); break;
+    case 'closeModal': closeModal(); break;
+    case 'clearDraft': draft = {sel:[], vals:{}}; renderDList(); renderBuilder(); break;
+    case 'toggleDecl': { const d = D(b.dataset.id); d.open = !d.open; done(d.open ? 'Back up' : 'Taken down'); break; }
+
+    case 'accept': decide(c, 'accept'); done(status(c).k === 'confirmed' ? "Everyone's in! The plan is agreed." : 'You said yes'); break;
+    case 'decline':
+      modal('Say no to this plan?', `<p class="muted">It's your choice. While you say no, this team-up is on hold.</p>
+        ${fld('m-note', 'Want to say why? (optional)', '<input id="m-note" type="text" name="note">')}`, 'Say no', f => { decide(c, 'decline', f.note); toast('You said no'); });
+      break;
+    case 'defer':
+      modal('Not ready to decide?', `<p class="muted">That's fine. “Not yet” doesn't count as a yes.</p>
+        ${fld('m-rev', 'When will you know?', '<input id="m-rev" type="text" name="revisit" required placeholder="e.g. When I know Thursday\'s plans">')}`, 'Save', f => { decide(c, 'defer', '', f.revisit); toast('Saved. This does not count as a yes.'); });
+      break;
+    case 'revise': {
+      const mineC = c.contributions.find(x => x.pid === S.me);
+      const declined = cpids(c).filter(p => p !== S.me && decOf(c, p)?.d === 'decline');
+      const req = c.concerns.filter(k => k.req);
+      modal('Change something', `<p class="muted">Everyone will be asked again. The old plan stays in the history.</p>
+        ${req.length ? `<div class="note blue"><b>Worries to consider:</b> ${req.map(k => esc(first(k.by)) + ': ' + esc(k.text)).join(' · ')}</div>` : ''}
+        ${fld('m-terms', 'The plan', `<textarea id="m-terms" name="terms" rows="4">${esc(c.terms)}</textarea>`)}
+        ${fld('m-mine', 'What you will do <span class="h">(only you can change this)</span>', `<input id="m-mine" type="text" name="mine" value="${esc(mineC.text)}">`)}
+        ${declined.length ? `<label class="check-row"><input type="checkbox" name="drop"> Remove the people who said no (${declined.map(first).map(esc).join(', ')})</label>` : ''}
+        ${fld('m-reason', 'What did you change? (optional)', '<input id="m-reason" type="text" name="reason">')}`, 'Save change', f => {
+          decide(c, 'revise', f.reason);
+          newVersion(c, cc => {
+            if (f.drop) cc.contributions = cc.contributions.filter(x => !declined.includes(x.pid));
+            cc.contributions = cc.contributions.map(x => x === mineC ? {...x, text: f.mine || x.text} : x);
+            cc.terms = f.terms;
+          }, f.reason || '');
+          toast('Plan changed. Everyone is asked again.');
+        });
+      break;
+    }
+    case 'concern':
+      modal('Share a worry', `<p class="muted">You'll be heard and can ask for a change. You can't block the plan.</p>
+        ${fld('m-concern', 'Your worry', '<textarea id="m-concern" name="text" rows="3" required></textarea>')}
+        <label class="check-row"><input type="checkbox" name="req" checked> Ask them to change the plan</label>`, 'Share', f => {
+          c.concerns.push({by:S.me, text:f.text, req:!!f.req, v:c.version, at:now()});
+          log(c, 'concern', `Shared a worry${f.req ? ' and asked for a change' : ''}: ${f.text}`); toast('Worry shared');
+        });
+      break;
+    case 'affected': c.affected.push(S.me); log(c, 'affected', 'Said this affects them'); done('You can now share worries about this'); break;
+    case 'join': {
+      const my = S.declarations.filter(d => d.by === S.me && d.open);
+      modal('Join in', `<p class="muted">Adding yourself changes the plan, so everyone is asked again.</p>
+        ${my.length ? fld('m-decl', 'Use one of your posts (optional)', `<select class="inp" id="m-decl" name="declId"><option value="">None</option>${my.map(d => `<option value="${esc(d.id)}">${esc(d.title)}</option>`).join('')}</select>`) : ''}
+        ${fld('m-text', 'What will you do?', '<input id="m-text" type="text" name="text" required>')}
+        <label class="check-row"><input type="checkbox" name="necessary" checked> I must say yes too</label>`, 'Join', f => {
+          newVersion(c, cc => cc.contributions.push({pid:S.me, declId:f.declId || null, text:f.text, necessary:!!f.necessary}), first(S.me) + ' joined');
+          toast("You joined. Everyone is asked again.");
+        });
+      break;
+    }
+    case 'receipt': {
+      const maint = S.platform.maintainers.includes(S.me);
+      modal('How did it go for you?', `<p class="muted">Tell your own side. Others can say they've seen it.</p>
+        <div class="field"><span class="lbl">Overall</span><div class="seg out">${Object.keys(OUT).map((k, i) =>
+          `<label><input type="radio" name="outcome" value="${k}" ${i === 0 ? 'required' : ''}>${OUT[k]}</label>`).join('')}</div></div>
+        ${fld('m-prov', 'What happened?', '<textarea id="m-prov" name="provided" rows="2" required placeholder="e.g. Joe fitted the new cartridge"></textarea>')}
+        ${fld('m-unres', 'Anything still not sorted? (optional)', '<input id="m-unres" type="text" name="unresolved" placeholder="e.g. Still drips a little">')}
+        ${fld('m-ack', 'Anything else? (optional)', '<input id="m-ack" type="text" name="ack">')}
+        ${c.scope === 'platform' && maint && !S.platform.features.simple ? `<label class="check-row"><input type="checkbox" name="feature"> Switch on Simple mode for everyone to try</label>` : ''}`,
+        'Share', f => {
+          S.receipts.push({id:uid('r'), cid:c.id, v:c.confirmedV, by:S.me, provided:f.provided, outcome:f.outcome, ack:f.ack, unresolved:f.unresolved, at:now(), acks:[]});
+          log(c, 'receipt', `Shared how it went (${OUT[f.outcome].toLowerCase()}): ${f.provided}${f.unresolved ? ' · not sorted: ' + f.unresolved : ''}`);
+          if (f.feature){ S.platform.features.simple = {by:S.me, cid:c.id, at:now()}; log(c, 'feature', 'Switched on Simple mode'); }
+          toast('Thanks for sharing');
+        });
+      break;
+    }
+    case 'ack': {
+      const r = S.receipts.find(x => x.id === b.dataset.rid);
+      r.acks.push({by:S.me, at:now()}); log(C(r.cid), 'ack', `Saw ${first(r.by)}'s update`); done('Marked as seen'); break;
+    }
+    case 'followup': prefill = {kind:'need', scope:c.scope, title:'More help with “' + c.title + '”: '}; S.tab = 'post'; done(); scrollTo(0, 0); break;
+    case 'export': {
+      const txt = JSON.stringify(S, null, 2);
+      const show = () => { modal('All data', `<p class="muted">Select all of this text and copy it.</p><textarea id="m-json" rows="12" readonly>${esc(txt)}</textarea>`, 'Done', () => {}); const t = $('#m-json'); if (t){ t.focus(); t.select(); } };
+      try { navigator.clipboard.writeText(txt).then(() => toast('Copied'), show); } catch(err){ show(); }
+      break;
+    }
+    case 'importPick': $('#importFile').click(); break;
+    case 'reset':
+      if (!resetArmed){ resetArmed = true; render(); }
+      else { resetArmed = false; S = seed(); draft = {sel:[], vals:{}}; done('Started over'); scrollTo(0, 0); }
+      break;
+  }
+});
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+
+document.addEventListener('submit', e => {
+  if (e.target.id === 'declForm'){
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    S.declarations.unshift({id:uid('d'), by:S.me, kind:f.kind, scope:f.scope === 'platform' ? 'platform' : 'world', title:f.title.trim(),
+      context:f.context || '', availability:f.availability || '', conditions:f.conditions || '', expectations:f.expectations || '', open:true, at:now()});
+    done('Posted! Others can now team up with you.');
+  }
+  if (e.target.id === 'builder'){
+    e.preventDefault(); captureBuilder();
+    const {ds, scope, pids, others} = builderInfo();
+    if (pids.length < 2) return;
+    const contributions = ds.map(d => ({pid:d.by, declId:d.id, text:draft.vals['t_' + d.id] || d.title, necessary:draft.vals['n_' + d.id] !== false}));
+    if (!contributions.some(x => x.necessary)){ toast('At least one person must say yes'); return; }
+    const c = {id:uid('c'), title:draft.vals.title || ds[0].title, scope, version:1, terms:draft.vals.terms || '',
+      contributions, affected: others.filter(p => draft.vals['a_' + p.id]).map(p => p.id),
+      decisions:{}, decisionLog:[], concerns:[], log:[], versions:[], createdBy:S.me, at:now(), confirmedV:null};
+    c.versions.push({v:1, terms:c.terms, contributions:clone(contributions), by:S.me, at:now(), note:'First plan'});
+    log(c, 'propose', 'Started this team-up');
+    S.commitments.unshift(c); draft = {sel:[], vals:{}}; jumpTo = c.id;
+    done('Team-up started. Now everyone needed decides.');
+  }
+  if (e.target.id === 'addP'){
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    S.participants.push({id:uid('p'), name:f.name.trim(), role:(f.role || 'Member').trim()});
+    done('Person added');
+  }
+});
+
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'simple'){ (S.prefs[S.me] ||= {}).simple = t.checked; done(); }
+  else if (t.dataset && t.dataset.sel){ captureBuilder(); const id = t.dataset.sel;
+    draft.sel = t.checked ? [...draft.sel, id] : draft.sel.filter(x => x !== id); renderBuilder(); }
+  else if (t.name === 'fScope'){ filt.scope = t.value; renderDList(); renderCList(); }
+  else if (t.id === 'importFile' && t.files[0]){
+    const rd = new FileReader();
+    rd.onload = () => { try { const o = JSON.parse(rd.result); if (!Array.isArray(o.declarations) || !Array.isArray(o.commitments) || !Array.isArray(o.participants)) throw 0; o.receipts ||= []; o.prefs ||= {}; o.platform ||= {maintainers:[], features:{}}; S = o; done('Data loaded'); } catch(err){ toast("That file isn't data from this app"); } };
+    rd.readAsText(t.files[0]);
+  }
+});
+document.addEventListener('input', e => { if (e.target.id === 'fQ'){ filt.q = e.target.value; renderDList(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#modal').hidden) closeModal(); });
+
+save(); render();
+</script>
+
+</body></html>
